@@ -14,7 +14,6 @@ const StyledBody = styled.div`
   padding: 0.4rem 1rem;
   max-width: 80rem;
   background-color: var(--color-gray-200);
-  color: green;
   padding: 1rem;
   &:nth-child(even) {
     background: var(--color-gray-200);

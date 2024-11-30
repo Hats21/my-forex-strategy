@@ -87,14 +87,14 @@ const GlobalStyles = createGlobalStyle`
   }
 
   /* Indigo */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  --color-brand-50: #99d7f4;
+  --color-brand-100: #4db9eb;
+  --color-brand-200: #1aa5e6;
+  --color-brand-500: #019be3;
+  --color-brand-600: #017cb6;
+  --color-brand-700: #016d9f;
+  --color-brand-800: #014e72;
+  --color-brand-900: #001f2d;
 
 
 
