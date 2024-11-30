@@ -18,6 +18,7 @@ import AppLayout from "./ui/AppLayout";
 import Booking from "./pages/Booking";
 import Checkin from "./pages/Checkin";
 import { DarkModeProvider } from "./context/DarkMode";
+import MyStrategy from "./pages/MyStrategy";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,8 +49,11 @@ function App() {
               <Route path="/cabins" element={<Cabins />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/users" element={<Users />} />
+              <Route path="/my_strategy" element={<MyStrategy />} />
+
             </Route>
             <Route path="/login" element={<Login />} />
+
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>

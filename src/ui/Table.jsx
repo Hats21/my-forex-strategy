@@ -28,7 +28,13 @@ const StyledHeader = styled(CommonRow)`
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
-  color: var(--color-grey-600);
+  background: var(--color-brand-600);
+  background: #019be3;
+
+  color: var(--color-grey-200);
+  font-size: 1.4rem;
+  /* font-weight: 600; */
+  text-transform: capitalize;
 `;
 
 const StyledRow = styled(CommonRow)`

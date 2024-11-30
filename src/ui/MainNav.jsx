@@ -5,8 +5,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
 import { IoSettingsOutline } from "react-icons/io5";
 
-// import { FiBookOpen } from "react-icons/fi";
 import { GiBuyCard } from "react-icons/gi";
+import { GiChessKnight } from "react-icons/gi";
 
 const NavList = styled.ul`
   display: flex;
@@ -84,6 +84,12 @@ function MainNav() {
           <StyledNavLink to="/settings">
             <IoSettingsOutline />
             <span>Settings</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/my_strategy">
+            <GiChessKnight />
+            <span>My Strategy</span>
           </StyledNavLink>
         </li>
       </NavList>

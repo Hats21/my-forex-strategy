@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { format, isToday } from "date-fns";
 
 import { IoEyeOutline, IoTrash } from "react-icons/io5";
@@ -40,9 +40,46 @@ const Stacked = styled.div`
   }
 `;
 
-const Amount = styled.div`
+const Profit = styled.p`
+  font-size: 1.8rem;
   font-family: "Sono";
   font-weight: 500;
+
+  ${(props) =>
+    props.type === "profit" &&
+    css`
+      color: #019be3;
+    `}
+  ${(props) =>
+    props.type === "lose" &&
+    css`
+      color: #e30101;
+    `}
+`;
+
+const Type = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-grey-600);
+  font-family: "Sono";
+  & span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    ${(props) =>
+      props.type === "sell" &&
+      css`
+        background: red;
+      `}
+    ${(props) =>
+      props.type === "buy" &&
+      css`
+        background: #019be3;
+      `}
+  }
 `;
 
 function BookingRow({ booking }) {
@@ -67,7 +104,16 @@ function BookingRow({ booking }) {
   return (
     <Table.Row>
       <Cabin>{booking.symbol}</Cabin>
-      <p>{booking.type}</p>
+      <Type type={booking.type.toLowerCase()}>
+        <span></span>
+        <p
+          style={{
+            textTransform: "capitalize",
+          }}
+        >
+          {booking.type}
+        </p>
+      </Type>
       <p>{booking.lot_size}</p>
 
       <p>1:3</p>
@@ -84,9 +130,15 @@ function BookingRow({ booking }) {
         </span>
       </Stacked> */}
 
-      <Tag type="green">profit</Tag>
+      <Tag type="green" status={booking.status}>
+        {booking.status}
+      </Tag>
 
-      <Amount>{booking.lot_size}</Amount>
+      <Profit type={booking.status}>
+        {booking.status === "profit"
+          ? `+${booking.profit_lose_amount}`
+          : `-${booking.profit_lose_amount}`}
+      </Profit>
       {/* <Modal>
         <Menus.Menu>
           <Menus.Toggle id={bookingId} />
