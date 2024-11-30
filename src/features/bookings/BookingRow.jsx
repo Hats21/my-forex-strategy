@@ -45,65 +45,49 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
-  booking: {
-    id: bookingId,
-    created_at,
-    startDate,
-    endDate,
-    numNights,
-    numGuests,
-    totalPrice,
-    status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}) {
+function BookingRow({ booking }) {
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
 
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
   const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
+    loss: "red",
+    profit: "green",
   };
 
-  function handleClickDetail(id) {
-    navigate(`/bookings/${id}`);
-  }
+  // function handleClickDetail(id) {
+  //   navigate(`/bookings/${id}`);
+  // }
 
-  function handleCheckout(id) {
-    checkout(id);
-  }
+  // function handleCheckout(id) {
+  //   checkout(id);
+  // }
 
   return (
     <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+      <Cabin>{booking.symbol}</Cabin>
+      <p>{booking.type}</p>
+      <p>{booking.lot_size}</p>
 
-      <Stacked>
-        <span>{guestName}</span>
+      <p>1:3</p>
 
-        <span>{email}</span>
-      </Stacked>
-
-      <Stacked>
+      {/* <Stacked>
         <span>
           {isToday(new Date(startDate)) ? "Today" : "Tommorow"}
           {/* //   formatDistanceFromNow(startDate)}
-          // &rarr; {numNights} night stay */}
+          // &rarr; {numNights} night stay //////
         </span>
         <span>
           {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
           {format(new Date(endDate), "MMM dd yyyy")}
         </span>
-      </Stacked>
+      </Stacked> */}
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type="green">profit</Tag>
 
-      <Amount>{formatCurrency(totalPrice)}</Amount>
-      <Modal>
+      <Amount>{booking.lot_size}</Amount>
+      {/* <Modal>
         <Menus.Menu>
           <Menus.Toggle id={bookingId} />
           <Menus.List id={bookingId}>
@@ -146,7 +130,7 @@ function BookingRow({
             resourceName={bookingId}
           />
         </Modal.Window>
-      </Modal>
+      </Modal> */}
     </Table.Row>
   );
 }

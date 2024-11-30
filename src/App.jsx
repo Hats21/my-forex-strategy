@@ -41,9 +41,9 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
 
               <Route path="/account" element={<Account />} />
-              <Route path="/bookings" element={<Bookings />} />
-              <Route path="/bookings/:bookingId" element={<Booking />} />
-              <Route path="/checkin/:bookingId" element={<Checkin />} />
+              <Route path="/trades" element={<Bookings />} />
+              <Route path="/trades/:bookingId" element={<Booking />} />
+              <Route path="/trades/:bookingId" element={<Checkin />} />
 
               <Route path="/cabins" element={<Cabins />} />
               <Route path="/settings" element={<Settings />} />

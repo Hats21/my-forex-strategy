@@ -5,7 +5,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
 import { IoSettingsOutline } from "react-icons/io5";
 
-import { FiBookOpen } from "react-icons/fi";
+// import { FiBookOpen } from "react-icons/fi";
+import { GiBuyCard } from "react-icons/gi";
 
 const NavList = styled.ul`
   display: flex;
@@ -62,9 +63,9 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/bookings">
-            <FiBookOpen />
-            <span>Bookings</span>
+          <StyledNavLink to="/trades">
+            <GiBuyCard />
+            <span>Trades</span>
           </StyledNavLink>
         </li>
         <li>

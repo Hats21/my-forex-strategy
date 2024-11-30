@@ -1,37 +1,35 @@
 // import { getToday } from "../utils/helpers";
-import { PAGE_SIZE } from "../utils/constants";
+// import { PAGE_SIZE } from "../utils/constants";
 import supabase from "./supabase";
 import { getToday } from "../utils/helpers";
 
-export async function getBookings({ filter, sortBy, page }) {
+// export async function getBookings({ filter, sortBy, page }) {
+export async function getBookings() {
   // const { data, error } = await supabase
   //   .from("bookings")
   //   .select("*, cabins(name), guests(fullName, email)")
   //   .eq("status", "unconfirmed")
   //   .gte("totalPrice", 7000);
-  console.log(page);
 
-  let query = supabase
-    .from("bookings")
-    .select("*, cabins(name), guests(fullName, email)", { count: "exact" });
+  let query = supabase.from("trades").select("*");
   // .eq(filter.field, filter.value);
 
   // FILTERING
-  if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
+  // if (filter) query = query[filter.method || "eq"](filter.field, filter.value);
 
   // SORTING
-  if (sortBy)
-    query = query.order(sortBy.field, {
-      ascending: sortBy.direction === "asc",
-    });
+  // if (sortBy)
+  //   query = query.order(sortBy.field, {
+  //     ascending: sortBy.direction === "asc",
+  //   });
 
   // PAGINATING
-  if (page) {
-    // page 1
-    const from = (page - 1) * PAGE_SIZE; // 0
-    const to = page * PAGE_SIZE - 1; // 9
-    query = query.range(from, to);
-  }
+  // if (page) {
+  //   // page 1
+  //   const from = (page - 1) * PAGE_SIZE; // 0
+  //   const to = page * PAGE_SIZE - 1; // 9
+  //   query = query.range(from, to);
+  // }
 
   const { data, error, count } = await query;
   //  { data, error } = await query.eq(filter.field, filter.value);
@@ -40,6 +38,10 @@ export async function getBookings({ filter, sortBy, page }) {
     console.log(error);
     throw new Error(error.message);
   }
+
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log(data);
+  console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
   return { count, data };
 }
