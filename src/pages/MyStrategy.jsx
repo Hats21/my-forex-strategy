@@ -2,6 +2,10 @@ import styled from "styled-components";
 import StrategyRow from "../features/strategy/StrategyRow";
 import Heading from "../ui/Heading";
 import Table from "../ui/Table";
+import { useQuery } from "@tanstack/react-query";
+import { getPlans } from "../services/apiPlans";
+import Spinner from "../ui/Spinner";
+import PlanRow from "../features/strategy/PlanRow";
 
 const plan_A = [
   { name: "Total maximum risk per trade", value: "3%" },
@@ -38,6 +42,16 @@ const StyledHeader = styled.h1`
 // `;
 
 function MyStrategy() {
+  const { isLoading, error, data } = useQuery({
+    queryFn: () => getPlans(),
+    queryKey: ["plans"],
+  });
+  if (isLoading) return <Spinner />;
+  if (error) return <p>Something went wrong {error.message}</p>;
+  console.log("===========================================");
+  console.log(data);
+  console.log("===========================================");
+
   return (
     <div>
       <Heading as="h4">Trading Plan</Heading>
@@ -69,6 +83,20 @@ function MyStrategy() {
           be withdrawn.
         </h2>
       </div>
+      <Table columns="1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">
+        <Table.Header>
+          <div>Days</div>
+          <div>Balance</div>
+          <div>%Risk/Trade</div>
+          <div>Min. R:R</div>
+          <div>Min Trades/Day</div>
+          <div>Max Trades/Day</div>
+          <div>Min. Strategy Score</div>
+          <div>Min. Daily pips target</div>
+          <div>Avg. Daily profit</div>
+        </Table.Header>
+        <Table.Body data={data.data} render={(cur) => <PlanRow plan={cur} />} />
+      </Table>
     </div>
   );
 }
