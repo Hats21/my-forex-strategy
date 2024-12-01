@@ -25,7 +25,7 @@ function BookingTable() {
   if (isLoading) return <Spinner />;
 
   if (error) return <p>{error.message}</p>;
-  if (bookings.length === 0) return <Empty resourceName="bookings" />;
+  if (bookings.length === 0) return <Empty resourceName="trading" />;
 
   // if (bookings.length > 0) return <p>It worked correctly</p>;
 
