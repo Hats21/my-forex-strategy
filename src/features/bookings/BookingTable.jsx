@@ -42,8 +42,9 @@ function BookingTable() {
 
   return (
     <Menus>
-      <Table columns="2fr 1fr 2fr 2fr 1fr 1fr 4.8rem">
+      <Table columns="2rem 2fr 1fr 2fr 2fr 1fr 1fr 4.8rem">
         <Table.Header>
+          <div></div>
           <div>Symbol</div>
           <div>Type</div>
           <div>Lot Size</div>

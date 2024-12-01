@@ -66,6 +66,16 @@ function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={setIsOpenModal ? "modal" : "regular"}
     >
+      <FormRow label="Trade Number" error={errors.trade_no?.message}>
+        <Input
+          disabled={isWorking}
+          type="number"
+          id="trade_no"
+          {...register("trade_no", {
+            required: "this field is required",
+          })}
+        />
+      </FormRow>
       <FormRow label="Currency Pair" error={errors.symbol?.message}>
         <Input
           disabled={isWorking}

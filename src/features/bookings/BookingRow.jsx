@@ -104,6 +104,7 @@ function BookingRow({ booking }) {
 
   return (
     <Table.Row>
+      <h5>{booking.trade_no}</h5>
       <Cabin>{booking.symbol}</Cabin>
       <Type type={booking.type.toLowerCase()}>
         <span></span>
