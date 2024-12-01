@@ -117,7 +117,7 @@ function BookingRow({ booking }) {
       </Type>
       <p>{booking.lot_size}</p>
 
-      <p>1:3</p>
+      <p>1 : {booking.risk_ratio}</p>
 
       {/* <Stacked>
         <span>

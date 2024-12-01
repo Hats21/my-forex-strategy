@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 
@@ -14,44 +15,45 @@ import { useEditCabin } from "./useEditCabin";
 function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
   const { id: editId, ...otherValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
+  // eslint-disable-next-line no-unused-vars
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? otherValues : {},
   });
 
   const { errors } = formState;
 
-  const { createCabin, isCreating } = useCreateCabin();
+  const { createTrade, isCreating } = useCreateCabin();
 
   const { editCabin, isEditing } = useEditCabin();
 
   function onSubmit(data) {
     const image = typeof data.image === "string" ? data.image : data.image[0];
 
-    if (isEditSession)
-      editCabin(
-        {
-          newCabinData: { ...data, image },
-          id: editId,
+    // if (isEditSession)
+    //   editCabin(
+    //     {
+    //       newCabinData: { ...data, image },
+    //       id: editId,
+    //     },
+    //     {
+    //       onSuccess: (returnedData) => {
+    //         console.log(returnedData);
+    //         reset();
+    //         setIsOpenModal?.(false);
+    //       },
+    //     },
+    //   );
+    // else
+    createTrade(
+      { ...data, image },
+      {
+        onSuccess: (returnedData) => {
+          console.log(returnedData);
+          reset();
+          setIsOpenModal?.(false);
         },
-        {
-          onSuccess: (returnedData) => {
-            console.log(returnedData);
-            reset();
-            setIsOpenModal?.(false);
-          },
-        },
-      );
-    else
-      createCabin(
-        { ...data, image },
-        {
-          onSuccess: (returnedData) => {
-            console.log(returnedData);
-            reset();
-            setIsOpenModal?.(false);
-          },
-        },
-      );
+      },
+    );
   }
 
   function onError(errors) {
@@ -64,72 +66,85 @@ function CreateCabinForm({ cabinToEdit = {}, setIsOpenModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={setIsOpenModal ? "modal" : "regular"}
     >
-      <FormRow label="Cabin name" error={errors.name?.message}>
+      <FormRow label="Currency Pair" error={errors.symbol?.message}>
         <Input
           disabled={isWorking}
           type="text"
-          id="name"
-          {...register("name", {
+          id="symbol"
+          {...register("symbol", {
             required: "This field is reqiured",
           })}
         />
       </FormRow>
 
-      <FormRow label="Maximum capacity" error={errors?.maxCapacity?.message}>
+      <FormRow label="Type" error={errors?.type?.message}>
         <Input
           disabled={isWorking}
-          type="number"
-          id="maxCapacity"
-          {...register("maxCapacity", {
+          type="text"
+          id="type"
+          {...register("type", {
             required: "This field is reqiured",
-            min: {
-              value: 1,
-              message: "Capacity should be at least 1",
-            },
           })}
         />
       </FormRow>
 
-      <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+      <FormRow label="Lot size" error={errors?.lot_size?.message}>
         <Input
           disabled={isWorking}
-          type="number"
+          type="text"
           id="regularPrice"
-          {...register("regularPrice", {
+          {...register("lot_size", {
             required: "This field is reqiured",
-            min: {
-              value: 1,
-              message: "Capacity should be at least 1",
-            },
           })}
         />
       </FormRow>
 
-      <FormRow label="Discount" error={errors?.discount?.message}>
+      <FormRow label="Risk Ratio" error={errors?.risk_ratio?.message}>
         <Input
           disabled={isWorking}
-          type="number"
-          id="discount"
-          defaultValue={0}
-          {...register("discount", {
+          type="text"
+          id="risk"
+          defaultValue={3}
+          {...register("risk_ratio", {
             required: "This field is reqiured",
-            validate: (value) =>
-              value <= getValues().regularPrice ||
-              "Discount should be less than the regular price",
+          })}
+        />
+      </FormRow>
+      <FormRow label="Status" error={errors?.status?.message}>
+        <Input
+          disabled={isWorking}
+          type="text"
+          id="status"
+          {...register("status", {
+            required: "This field is reqiured",
           })}
         />
       </FormRow>
 
       <FormRow
-        label="Description for website"
-        error={errors?.description?.message}
+        label="Profit/lose amount"
+        error={errors?.profit_lose_amount?.message}
+      >
+        <Input
+          disabled={isWorking}
+          type="text"
+          id="profit_lose_amount"
+          {...register("profit_lose_amount", {
+            required: "This field is reqiured",
+          })}
+        />
+      </FormRow>
+
+      <FormRow
+        label="Reason why you traded it "
+        error={errors?.reason?.message}
       >
         <Textarea
           disabled={isWorking}
-          type="number"
-          id="description"
+          type="text"
+          id="reason"
           defaultValue=""
-          {...register("description", {
+          {...register("reason", {
             required: "This field is reqiured",
           })}
         />

@@ -29,7 +29,7 @@ function useBookings() {
     data: { data: bookings, count } = {},
   } = useQuery({
     queryFn: () => getBookings({ filter, sortBy, page }),
-    queryKey: ["bookings", filter, sortBy, page],
+    queryKey: ["trades"],
   });
 
   // PRE-FETCHING
