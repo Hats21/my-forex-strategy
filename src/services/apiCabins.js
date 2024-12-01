@@ -16,16 +16,19 @@ export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
   const imagePath = hasImagePath
     ? newCabin.image
-    : `${supabaseUrl}/storage/v1/object/public/cabin-images/${imageName}`;
-  let query = supabase.from("cabins");
+    : `${supabaseUrl}/storage/v1/object/public/traded_images/${imageName}`;
+  console.log(imagePath);
+  const tempImagePath =
+    "https://uwppoupiylwjzbercgsr.supabase.co/storage/v1/object/public/traded_images/developer-modified.png";
+  let query = supabase.from("trades");
   // 1. creating cabin
-  if (!id) query = query.insert([{ ...newCabin, image: imagePath }]);
+  if (!id) query = query.insert([{ ...newCabin, image: tempImagePath }]);
   // 2. Edit cabin
-  if (id)
-    query = query
-      .update({ ...newCabin, image: imagePath })
-      .eq("id", id)
-      .select();
+  // if (id)
+  //   query = query
+  //     .update({ ...newCabin, image: imagePath })
+  //     .eq("id", id)
+  //     .select();
   const { data, error } = await query.select().single();
 
   if (error) throw new Error(error.message);
@@ -43,8 +46,22 @@ export async function createEditCabin(newCabin, id) {
   return data;
 }
 
+export async function createTrade(trade) {
+  const imageName = `${Math.random()}-${trade.image.name}`.replaceAll("/", "");
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/traded_images/${imageName}`;
+  // 1. creating cabin
+  const { data, error } = await supabase
+    .from("trades")
+    .insert([{ ...trade, image: imagePath }])
+    .select();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function deleteCabin(id) {
-  const { data, error } = await supabase.from("cabins").delete().eq("id", id);
-  if (error) throw new Error("Couldn't delete the cabin. Please try again!");
+  const { data, error } = await supabase.from("trades").delete().eq("id", id);
+  if (error) throw new Error("Couldn't delete this trade. Please try again!");
   return data;
 }
