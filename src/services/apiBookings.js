@@ -11,7 +11,7 @@ export async function getBookings() {
   //   .eq("status", "unconfirmed")
   //   .gte("totalPrice", 7000);
 
-  let query = supabase.from("trades").select("*");
+  let query = supabase.from("trades").select("*", { count: "exact" });
   // .eq(filter.field, filter.value);
 
   // FILTERING

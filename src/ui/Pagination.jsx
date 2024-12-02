@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
 // import { BsCaretLeftSquare, BsCaretRightSquare } from "react-icons/bs";
@@ -78,7 +79,7 @@ function Pagination({ count }) {
     setSearchParams(searchParams);
   }
 
-  if (count <= PAGE_SIZE) return null;
+  // if (count <= PAGE_SIZE) return null;
 
   return (
     <StyledPagination>
@@ -106,3 +107,9 @@ function Pagination({ count }) {
 }
 
 export default Pagination;
+
+// function Pagination({ count }) {
+//   return <div>total {count} trades</div>;
+// }
+
+// export default Pagination;
