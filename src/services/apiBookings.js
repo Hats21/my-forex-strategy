@@ -12,6 +12,15 @@ export async function getBookings() {
   //   .gte("totalPrice", 7000);
 
   let query = supabase.from("trades").select("*", { count: "exact" });
+
+  query = query.order("trade_no", {
+    ascending: true,
+  });
+
+  // if (sortBy)
+  //   query = query.order(sortBy.field, {
+  //     ascending: sortBy.direction === "asc",
+  //   });
   // .eq(filter.field, filter.value);
 
   // FILTERING
